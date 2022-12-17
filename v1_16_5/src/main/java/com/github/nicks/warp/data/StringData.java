@@ -1,6 +1,8 @@
 package com.github.nicks.warp.data;
 
 import com.github.nicks.nicklib.data.Config;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -63,10 +65,35 @@ public class StringData {
     }
 
 
+    public String msgWarpHelp(Player player) {
+        List<String> message = config.getConfig().getStringList("messages.warp.help");
+
+        for(String msg : message) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', getPrefix() + msg));
+        }
+        return null;
+    }
+
+
+    /**
+     * Get String from config | messages.warp.teleportTargetP
+     */
+    public String msgWarpTeleportTargetP() {
+        return getPrefix() + config.getString("messages.warp.teleportTargetP");
+    }
+
+
+    /**
+     * Get String from config | messages.warp.teleportTargetT
+     */
+    public String msgWarpTeleportTargetT() {
+        return getPrefix() + config.getString("messages.warp.teleportTargetT");
+    }
+
+
     /**
      * Get StringList from config | Messages.warp.list
      * @param list
-     * @return
      */
     public String getWarpList(List<String> list) {
         return getPrefix() + config.getString("messages.warp.list").replace("{list}", list.toString());
@@ -116,6 +143,10 @@ public class StringData {
         return getPrefix() + config.getString("errorMessages.warp.notExist");
     }
 
+
+    public String errorMsgNotPlayer() {
+        return getPrefix() + config.getString("errorMessages.warp.notPlayer");
+    }
 
 
     /**
