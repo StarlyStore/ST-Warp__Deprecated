@@ -19,6 +19,7 @@ public class WarpCmd implements CommandExecutor {
         WarpData warpData = new WarpData();
         StringData stringData = new StringData();
         String name;
+        Player target;
 
         if (sender instanceof Player player) {
 
@@ -30,20 +31,35 @@ public class WarpCmd implements CommandExecutor {
 
             switch (args[0]) {
 
+
+                case "도움말" -> {
+                    stringData.msgWarpHelp(player);
+                    return true;
+                }
+
                 case "이동" -> {
-                    if(args.length < 2) {
+                    if (args.length < 2) {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgExactly()));
                         return true;
                     }
-                    name = args[1];
-                    warpData.teleportWarp(player, name);
-                    return true;
+
+                    if (args.length == 3) {
+                        target = player.getServer().getPlayer(args[1]);
+                        name = args[2];
+                        warpData.teleportWarp(player, target, name);
+                        return true;
+
+                    } else if (args.length == 2) {
+                        name = args[1];
+                        warpData.teleportWarp(player, name);
+                        return true;
+                    }
                 }
 
                 case "생성", "create" -> {
                     if (player.isOp()) {
 
-                        if(args.length < 2) {
+                        if (args.length < 2) {
                             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgExactly()));
                         }
 
@@ -59,7 +75,7 @@ public class WarpCmd implements CommandExecutor {
                 case "제거", "delete", "삭제" -> {
                     if (player.isOp()) {
 
-                        if(args.length < 2) {
+                        if (args.length < 2) {
                             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgExactly()));
                             return true;
                         }
