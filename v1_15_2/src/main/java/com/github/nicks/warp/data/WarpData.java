@@ -73,6 +73,7 @@ public class WarpData {
     public void setSpawn(Player player) {
         config = new Config("spawn");
         config.setLocation("location", player.getLocation());
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpSetSpawn()));
     }
 
 
