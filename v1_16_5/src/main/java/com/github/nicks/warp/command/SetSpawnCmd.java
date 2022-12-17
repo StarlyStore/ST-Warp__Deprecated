@@ -20,8 +20,11 @@ public class SetSpawnCmd implements CommandExecutor {
         if(sender instanceof Player player) {
 
             if(args.length == 0) {
-                warpData.setSpawn(player);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpSetSpawn()));
+                if(player.isOp()) {
+                    warpData.setSpawn(player);
+                } else {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgNotPermission()));
+                }
                 return true;
             }
 
