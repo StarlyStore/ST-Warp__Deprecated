@@ -15,15 +15,15 @@ public class WarpData {
     private StringData stringData = new StringData();
 
 
-
     /**
      * Create a warp
+     *
      * @param player
      * @param name
      */
     public void createWarp(Player player, String name) {
         config = new Config("warp/" + name);
-        if(!config.isFileExist()) {
+        if (!config.isFileExist()) {
             config.setLocation("location", player.getLocation());
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpCreate(name)));
         } else {
@@ -34,6 +34,7 @@ public class WarpData {
 
     /**
      * Delete a warp
+     *
      * @param name
      */
     public void deleteWarp(Player player, String name) {
@@ -50,13 +51,14 @@ public class WarpData {
 
     /**
      * Teleport to a warp
+     *
      * @param player
      * @param name
      */
     public void teleportWarp(Player player, String name) {
         config = new Config("warp/" + name);
 
-        if(config.isFileExist()) {
+        if (config.isFileExist()) {
             World world = Bukkit.getWorld(config.getString("location.world"));
             player.teleport(new Location(world, config.getDouble("location.x"), config.getDouble("location.y"), config.getDouble("location.z")));
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpTeleport(name)));
@@ -65,9 +67,37 @@ public class WarpData {
         }
     }
 
+    /**
+     * Teleport to a warp
+     *
+     * @param player
+     */
+    public void teleportWarp(Player player, Player target, String name) {
+
+        config = new Config("warp/" + name);
+
+        if (config.isFileExist()) {
+            if (target == null) {
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgNotPlayer()));
+            } else {
+                World world = Bukkit.getWorld(config.getString("location.world"));
+                target.teleport(new Location(world, config.getDouble("location.x"), config.getDouble("location.y"), config.getDouble("location.z")));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpTeleportTargetP()
+                        .replace("{target}", target.getDisplayName())
+                        .replace("{warp}", name)));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpTeleportTargetT()
+                        .replace("{player}", target.getDisplayName())
+                        .replace("{warp}", name)));
+            }
+        } else {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgNotExist()));
+        }
+    }
+
 
     /**
      * Set spawn
+     *
      * @param player
      */
     public void setSpawn(Player player) {
@@ -79,12 +109,13 @@ public class WarpData {
 
     /**
      * Teleport to spawn
+     *
      * @param player
      */
     public void teleportSpawn(Player player) {
         config = new Config("spawn");
 
-        if(config.isFileExist()) {
+        if (config.isFileExist()) {
             World world = Bukkit.getWorld(config.getString("location.world"));
             player.teleport(new Location(world, config.getDouble("location.x"), config.getDouble("location.y"), config.getDouble("location.z")));
         } else {
