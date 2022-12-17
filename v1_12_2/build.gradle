@@ -36,8 +36,8 @@ jar {
 }
 
 task copyJar(type: Copy) {
-    from "\\build\\libs\\NK-Warp-1.0-SNAPSHOT-all.jar"
-    into "C:\\Users\\Yangd\\대영\\마인크래프트\\서버\\마인크래프트\\개발용\\1.19.2\\plugins"
+    from "\\build\\libs\\v1_12_2-1.0-SNAPSHOT-all.jar"
+    into "C:\\Users\\Yangd\\대영\\마인크래프트\\서버\\마인크래프트\\개발용\\1.12.2\\plugins"
 }
 
 build.dependsOn copyJar
