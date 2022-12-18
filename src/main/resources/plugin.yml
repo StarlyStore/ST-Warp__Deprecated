@@ -6,6 +6,9 @@ website: https://discord.gg/TF8jqSJjCG
 version: 1.0
 api-version: 1.16
 
+softdepend:
+  - ST-Core
+
 commands:
   warp:
     aliases: [워프]
