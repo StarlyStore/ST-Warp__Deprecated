@@ -1,6 +1,7 @@
 package net.starly.warp.data;
 
 import net.starly.core.data.Config;
+import net.starly.warp.WarpMain;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class StringData {
 
-    private Config config = new Config("config");
+    private Config config = new Config("config", WarpMain.getPlugin());
 
 
 

@@ -3,8 +3,8 @@ package net.starly.warp;
 import net.starly.core.data.Config;
 import net.starly.warp.command.SetSpawnCommand;
 import net.starly.warp.command.SpawnCommand;
-import net.starly.warp.command.WarpCommand;
 import net.starly.warp.command.WarpCmdTab;
+import net.starly.warp.command.WarpCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,15 +18,16 @@ public class WarpMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        plugin = this;
-        if(Bukkit.getPluginManager().getPlugin("ST-Core") == null) {
+        if (Bukkit.getPluginManager().getPlugin("ST-Core") == null) {
             log.warning("[" + plugin.getName() + "] ST-Core 플러그인이 적용되지 않았습니다! 플러그인을 비활성화합니다.");
             log.warning("[" + plugin.getName() + "] 다운로드 링크 : &fhttps://discord.gg/TF8jqSJjCG");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
 
-        Config config = new Config("config");
+        plugin = this;
+
+        Config config = new Config("config", plugin);
         config.loadDefaultConfig();
         init();
     }

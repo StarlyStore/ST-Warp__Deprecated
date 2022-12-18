@@ -2,6 +2,7 @@ package net.starly.warp.data;
 
 
 import net.starly.core.data.Config;
+import net.starly.warp.WarpMain;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -21,7 +22,7 @@ public class WarpData {
      * @param name
      */
     public void createWarp(Player player, String name) {
-        config = new Config("warp/" + name);
+        config = new Config("warp/" + name, WarpMain.getPlugin());
         if (!config.isFileExist()) {
             config.setLocation("location", player.getLocation());
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpCreate(name)));
@@ -37,7 +38,7 @@ public class WarpData {
      * @param name
      */
     public void deleteWarp(Player player, String name) {
-        config = new Config("warp/" + name);
+        config = new Config("warp/" + name, WarpMain.getPlugin());
 
         if (config.isFileExist()) {
             config.remove();
@@ -55,7 +56,7 @@ public class WarpData {
      * @param name
      */
     public void teleportWarp(Player player, String name) {
-        config = new Config("warp/" + name);
+        config = new Config("warp/" + name, WarpMain.getPlugin());
 
         if (config.isFileExist()) {
             World world = Bukkit.getWorld(config.getString("location.world"));
@@ -73,7 +74,7 @@ public class WarpData {
      */
     public void teleportWarp(Player player, Player target, String name) {
 
-        config = new Config("warp/" + name);
+        config = new Config("warp/" + name, WarpMain.getPlugin());
 
         if (config.isFileExist()) {
             if (target == null) {
@@ -100,7 +101,7 @@ public class WarpData {
      * @param player
      */
     public void setSpawn(Player player) {
-        config = new Config("spawn");
+        config = new Config("spawn", WarpMain.getPlugin());
         config.setLocation("location", player.getLocation());
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpSetSpawn()));
     }
@@ -112,7 +113,7 @@ public class WarpData {
      * @param player
      */
     public void teleportSpawn(Player player) {
-        config = new Config("spawn");
+        config = new Config("spawn", WarpMain.getPlugin());
 
         if (config.isFileExist()) {
             World world = Bukkit.getWorld(config.getString("location.world"));
