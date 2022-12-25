@@ -23,12 +23,13 @@ public class WarpData {
      */
     public void createWarp(Player player, String name) {
         config = new Config("warp/" + name, WarpMain.getPlugin());
+        config.loadDefaultConfig();
+
         if (!config.isFileExist()) {
             config.setLocation("location", player.getLocation());
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpCreate(name)));
-        } else {
+        } else
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgExist()));
-        }
     }
 
 
@@ -39,13 +40,13 @@ public class WarpData {
      */
     public void deleteWarp(Player player, String name) {
         config = new Config("warp/" + name, WarpMain.getPlugin());
+        config.loadDefaultConfig();
 
         if (config.isFileExist()) {
             config.remove();
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpDelete(name)));
-        } else {
+        } else
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgNotExist()));
-        }
     }
 
 
@@ -57,14 +58,13 @@ public class WarpData {
      */
     public void teleportWarp(Player player, String name) {
         config = new Config("warp/" + name, WarpMain.getPlugin());
+        config.loadDefaultConfig();
 
         if (config.isFileExist()) {
-            World world = Bukkit.getWorld(config.getString("location.world"));
             player.teleport(config.getLocation("location"));
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpTeleport(name)));
-        } else {
+        } else
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgNotExist()));
-        }
     }
 
     /**
@@ -73,13 +73,13 @@ public class WarpData {
      * @param player
      */
     public void teleportWarp(Player player, Player target, String name) {
-
         config = new Config("warp/" + name, WarpMain.getPlugin());
+        config.loadDefaultConfig();
 
         if (config.isFileExist()) {
-            if (target == null) {
+            if (target == null)
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgNotPlayer()));
-            } else {
+            else {
                 World world = Bukkit.getWorld(config.getString("location.world"));
                 target.teleport(config.getLocation("location"));
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpTeleportTargetP()
@@ -89,9 +89,8 @@ public class WarpData {
                         .replace("{player}", target.getDisplayName())
                         .replace("{warp}", name)));
             }
-        } else {
+        } else
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgNotExist()));
-        }
     }
 
 
@@ -102,6 +101,8 @@ public class WarpData {
      */
     public void setSpawn(Player player) {
         config = new Config("spawn", WarpMain.getPlugin());
+        config.loadDefaultConfig();
+
         config.setLocation("location", player.getLocation());
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpSetSpawn()));
     }
@@ -114,12 +115,11 @@ public class WarpData {
      */
     public void teleportSpawn(Player player) {
         config = new Config("spawn", WarpMain.getPlugin());
+        config.loadDefaultConfig();
 
-        if (config.isFileExist()) {
-            World world = Bukkit.getWorld(config.getString("location.world"));
+        if (config.isFileExist())
             player.teleport(config.getLocation("location"));
-        } else {
+        else
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpSetSpawn()));
-        }
     }
 }

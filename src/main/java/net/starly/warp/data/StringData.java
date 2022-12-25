@@ -1,18 +1,13 @@
 package net.starly.warp.data;
 
-import net.starly.core.data.Config;
-import net.starly.warp.WarpMain;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
+import static net.starly.warp.WarpMain.config;
 
 public class StringData {
-
-    private Config config = new Config("config", WarpMain.getPlugin());
-
-
 
     /**
      * Get String from config | messages.warp.main
@@ -147,6 +142,10 @@ public class StringData {
 
     public String errorMsgNotPlayer() {
         return getPrefix() + config.getString("errorMessages.warp.wrong_target");
+    }
+
+    public String errorMsgWrong() {
+        return getPrefix() + config.getString("errorMessages.warp.wrong_command");
     }
 
 

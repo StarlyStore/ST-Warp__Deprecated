@@ -19,14 +19,14 @@ public class WarpCmdTab implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 1) {
-            return sender.isOp() ? List.of("생성", "제거", "목록") : Collections.emptyList();
+            return sender.isOp() ? List.of("이동", "생성", "제거", "목록") : List.of("이동");
         } else if (args.length == 2) {
             if (sender.isOp()) {
                 if (List.of("제거", "remove", "이동", "teleport").contains(args[0])) {
-                    return Arrays
+                    return new File(WarpMain.getPlugin().getDataFolder(), "warp").list() != null ? Arrays
                             .asList(Arrays.stream(new File(WarpMain.getPlugin().getDataFolder(), "warp").list())
                             .map(s -> s.replace(".yml", ""))
-                            .toArray(String[]::new));
+                            .toArray(String[]::new)) : Collections.emptyList();
                 }
             } else return Collections.emptyList();
         } else if (args.length == 3) {

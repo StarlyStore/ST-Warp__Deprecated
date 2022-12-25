@@ -3,7 +3,7 @@ main: net.starly.warp.WarpMain
 author: Starly Team
 website: https://discord.gg/TF8jqSJjCG
 
-version: 1.0
+version: 1.0.1
 api-version: 1.16
 
 softdepend:
@@ -11,8 +11,8 @@ softdepend:
 
 commands:
   warp:
-    aliases: [워프]
+    aliases: [ 워프 ]
   spawn:
-    aliases: [스폰,넴주,tmvhs]
+    aliases: [ 스폰, 넴주, tmvhs ]
   setspawn:
-    aliases: [셋스폰,스폰설정]
+    aliases: [ 셋스폰, 스폰설정 ]
