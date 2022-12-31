@@ -3,6 +3,7 @@ package net.starly.warp.command;
 import net.starly.warp.WarpMain;
 import net.starly.warp.data.StringData;
 import net.starly.warp.data.WarpData;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -44,7 +45,7 @@ public class WarpCommand implements CommandExecutor {
 
                 case "이동", "teleport" -> {
                     if (args.length == 3) {
-                        target = player.getServer().getPlayer(args[2]);
+                        target = Bukkit.getPlayer(args[2]);
                         name = args[1];
                         warpData.teleportWarp(player, target, name);
                         return true;

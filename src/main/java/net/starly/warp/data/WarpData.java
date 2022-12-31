@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class WarpData {
 
     private Config config;
-    private StringData stringData = new StringData();
+    private final StringData stringData = new StringData();
 
 
     /**
@@ -23,7 +23,6 @@ public class WarpData {
      */
     public void createWarp(Player player, String name) {
         config = new Config("warp/" + name, WarpMain.getPlugin());
-        config.loadDefaultConfig();
 
         if (!config.isFileExist()) {
             config.setLocation("location", player.getLocation());
@@ -40,10 +39,9 @@ public class WarpData {
      */
     public void deleteWarp(Player player, String name) {
         config = new Config("warp/" + name, WarpMain.getPlugin());
-        config.loadDefaultConfig();
 
         if (config.isFileExist()) {
-            config.remove();
+            config.delete();
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpDelete(name)));
         } else
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.errorMsgNotExist()));
@@ -58,7 +56,6 @@ public class WarpData {
      */
     public void teleportWarp(Player player, String name) {
         config = new Config("warp/" + name, WarpMain.getPlugin());
-        config.loadDefaultConfig();
 
         if (config.isFileExist()) {
             player.teleport(config.getLocation("location"));
@@ -74,7 +71,6 @@ public class WarpData {
      */
     public void teleportWarp(Player player, Player target, String name) {
         config = new Config("warp/" + name, WarpMain.getPlugin());
-        config.loadDefaultConfig();
 
         if (config.isFileExist()) {
             if (target == null)
@@ -101,7 +97,6 @@ public class WarpData {
      */
     public void setSpawn(Player player) {
         config = new Config("spawn", WarpMain.getPlugin());
-        config.loadDefaultConfig();
 
         config.setLocation("location", player.getLocation());
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpSetSpawn()));
@@ -115,10 +110,10 @@ public class WarpData {
      */
     public void teleportSpawn(Player player) {
         config = new Config("spawn", WarpMain.getPlugin());
-        config.loadDefaultConfig();
 
-        if (config.isFileExist())
+        if (config.isFileExist()) {
             player.teleport(config.getLocation("location"));
+        }
         else
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringData.msgWarpSetSpawn()));
     }
